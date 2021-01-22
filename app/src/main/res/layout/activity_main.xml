@@ -22,7 +22,7 @@
             android:text="로또" />
 
         <Button
-            android:id="@+id/year_lotto"
+            android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,15 +30,53 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/numberContainer"
+        android:id="@+id/lottoContainer"
+        android:layout_below="@+id/numberButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/numberButton">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/temp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="O회 당첨결과" />
+
+        <TextView
+            android:id="@+id/temp2"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textSize="14dp"
+            android:text="날짜" />
+
+        <LinearLayout
+            android:id="@+id/numberContainer_adapter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/temp3"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:text="당첨금" />
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_above="@+id/adView"
-        android:layout_below="@+id/numberContainer"
+        android:layout_below="@+id/lottoContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="3"
@@ -52,28 +90,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_margin="10dp"
-                android:id="@+id/button6"
+                android:id="@+id/lotto_occur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="로또 번호 통계" />
+                android:text="로또 번호 발생" />
 
             <Button
-                android:layout_margin="10dp"
-                android:id="@+id/button5"
+                android:id="@+id/lotto_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:text="로또 번호 수동 입력" />
 
             <Button
                 android:layout_margin="10dp"
-                android:id="@+id/button4"
+                android:id="@+id/lotto_static"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="로또 번호 발생" />
+                android:text="로또 번호 통계" />
 
         </LinearLayout>
 
@@ -86,27 +124,28 @@
 
             <Button
                 android:layout_margin="10dp"
-                android:id="@+id/button7"
+                android:id="@+id/year_occur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="연금 복권 번호 발생" />
 
             <Button
+                android:id="@+id/year_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:id="@+id/button9"
+                android:layout_weight="1"
+                android:text="연금복권 수동입력" />
+
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/year_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="연금복권 당첨 번호 확인" />
 
-            <Button
-                android:layout_margin="10dp"
-                android:id="@+id/button8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="연금복권 수동입력" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,8 +156,16 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/occur_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:id="@+id/button11"
+                android:layout_weight="1"
+                android:text="발생번호 확인" />
+
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/input_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -126,19 +173,11 @@
 
             <Button
                 android:layout_margin="10dp"
-                android:id="@+id/button12"
+                android:id="@+id/lotto_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="로또 당첨번호 확인" />
-
-            <Button
-                android:layout_margin="10dp"
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="발생번호 확인" />
 
         </LinearLayout>
     </LinearLayout>
