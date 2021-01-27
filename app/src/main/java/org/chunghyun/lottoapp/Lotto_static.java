@@ -1,11 +1,16 @@
 package org.chunghyun.lottoapp;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,59 +22,72 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.chunghyun.lottoapp.adapter.Lotto_static_adapter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.DataNode;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Lotto_static extends AppCompatActivity {
 
-    // 로또 API
-    JsonObject jsonObject;
-    RequestQueue requestQueue;
-
+    RecyclerView recyclerView;
+    ArrayList<String> list;
+    ArrayList<String> num;
+    Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_static);
 
-        if(requestQueue == null){
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
+        init();
     }
+    public void init(){
+        list = new ArrayList<>();
+        num = new ArrayList<>();
+        context = getApplicationContext();
+        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+        jsoupAsyncTask.execute();
+        recyclerView = findViewById(R.id.static_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-    public void requestLottoNumber() {
-        String lotto_No = "946";   // 이번 회차 번호로 되도록 고치기
-        String[] lotto_number = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6", "bnusNo"};
-        String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + lotto_No;
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.numberContainer_adapter);
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                jsonObject = (JsonObject) JsonParser.parseString(response);
-                int resId = 0;
-                for (int i = 0; i < lotto_number.length - 1; i++) {
-                    String temp = "ball_" + jsonObject.get(lotto_number[i]);
-                    resId = getResources().getIdentifier(temp, "drawable", getPackageName());
-                    ImageView image = new ImageView(getApplicationContext());
-                    image.setImageResource(resId);
-                    linearLayout.addView(image);
+    }
+    private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                Document doc = Jsoup.connect("https://dhlottery.co.kr/gameResult.do?method=statByNumber").get();
+                Elements round = doc.select(".graph");
+                for(Element elem : round){
+                    String tmp = elem.select("td").text();
+                    list.add(tmp.substring(0, tmp.length()-1));
                 }
+                Elements e = doc.select("tbody").get(1).select("tr").select("td");
+                int count = 0;
+                for(Element ee : e){
+                    count++;
+                    if(count % 3 == 0)
+                        num.add(ee.text().toString());
+                }
+            }catch(IOException e){
+                e.printStackTrace();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            return null;
+        }
 
-            }
-        }) {
-            // Header나 요청 parameter를 재정의 할 수 있다.
-            // GET방식에서는 url에 parameter가 함께 있어 불필요, POST 방식에서 사용
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-        request.setShouldCache(false); // 캐싱하지 말고 매번 받은것은 다시 보여주도록 설정
-        requestQueue.add(request);
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Lotto_static_adapter adapter = new Lotto_static_adapter(num, list, context);
+            recyclerView.setAdapter(adapter);
+            super.onPostExecute(aVoid);
+        }
     }
 
 }

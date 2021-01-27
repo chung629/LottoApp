@@ -3,6 +3,7 @@ package org.chunghyun.lottoapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,11 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     // 로또 API
     JsonObject jsonObject;
     RequestQueue requestQueue;
+    String curRound;
 
 
     @Override
@@ -55,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         adFunction();
         init();
+
         // 로또 API 관련
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
-        requestLottoNumber();
     }
 
     // 레이아웃 초기화
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.lotto_confirm:
                         intent = new Intent(getApplicationContext(), Lotto_confirm.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                 }
@@ -143,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
         occur_confirm.setOnClickListener(onClickListener);
         input_confirm.setOnClickListener(onClickListener);
         lotto_confirm.setOnClickListener(onClickListener);
+        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
+        jsoupAsyncTask.execute();
     }
+
 
     // 애드몹 관련
     public void adFunction(){
@@ -179,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 로또 번호 관련
-    public void requestLottoNumber() {
-        String lotto_No = "946";   // 이번 회차 번호로 되도록 고치기
+    public void requestLottoNumber(String round) {
+        String lotto_No = round;   // 이번 회차 번호로 되도록 고치기
         String[] lotto_number = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6", "bnusNo"};
         String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=" + lotto_No;
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.numberContainer_adapter);
@@ -232,5 +242,20 @@ public class MainActivity extends AppCompatActivity {
         };
         request.setShouldCache(false); // 캐싱하지 말고 매번 받은것은 다시 보여주도록 설정
         requestQueue.add(request);
+    }
+    // 웹크롤링을 통한 현재 회차 정보 가져오기
+    private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                Document doc = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get();
+                Elements round = doc.select("#lottoDrwNo");
+                curRound = round.text();
+                requestLottoNumber(curRound);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
