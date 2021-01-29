@@ -3,6 +3,7 @@
     package="org.chunghyun.lottoapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.LottoApp">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -22,15 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Input_confirm"/>
-        <activity android:name=".Lotto_confirm"/>
-        <activity android:name=".Lotto_input_number"/>
+        <activity android:name=".confirm.Input_confirm"/>
+        <activity android:name=".useInternet.Lotto_confirm"/>
+        <activity android:name=".occur.Lotto_input_number"/>
         <activity android:name=".Lotto_occur_number"/>
-        <activity android:name=".Lotto_static"/>
-        <activity android:name=".Occur_confirm"/>
-        <activity android:name=".Year_confirm"/>
-        <activity android:name=".Year_input_number"/>
-        <activity android:name=".Year_occur_number"/>
+        <activity android:name=".useInternet.Lotto_static"/>
+        <activity android:name=".confirm.Occur_confirm"/>
+        <activity android:name=".confirm.Select_number_confirm"/>
+        <activity android:name=".occur.Select_number_occur"/>
+        <activity android:name=".useInternet.Lotto_QR"/>
     </application>
 
 </manifest>

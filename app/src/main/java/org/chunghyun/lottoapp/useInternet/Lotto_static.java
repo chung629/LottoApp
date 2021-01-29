@@ -1,4 +1,4 @@
-package org.chunghyun.lottoapp;
+package org.chunghyun.lottoapp.useInternet;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.chunghyun.lottoapp.R;
 import org.chunghyun.lottoapp.adapter.Lotto_static_adapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;

@@ -5,15 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import org.chunghyun.lottoapp.R;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class Lotto_confirm_adapter extends RecyclerView.Adapter<Lotto_confirm_adapter.ViewHolder> {

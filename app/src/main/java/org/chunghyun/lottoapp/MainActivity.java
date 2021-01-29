@@ -27,6 +27,14 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.chunghyun.lottoapp.confirm.Input_confirm;
+import org.chunghyun.lottoapp.confirm.Occur_confirm;
+import org.chunghyun.lottoapp.confirm.Select_number_confirm;
+import org.chunghyun.lottoapp.occur.Lotto_input_number;
+import org.chunghyun.lottoapp.occur.Select_number_occur;
+import org.chunghyun.lottoapp.useInternet.Lotto_QR;
+import org.chunghyun.lottoapp.useInternet.Lotto_confirm;
+import org.chunghyun.lottoapp.useInternet.Lotto_static;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -38,8 +46,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private AdView mAdView;
-    private Button lotto;
-    private Button year;
     private Button lotto_occur;
     private Button lotto_input;
     private Button lotto_static;
@@ -53,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     JsonObject jsonObject;
     RequestQueue requestQueue;
     String curRound;
+    String[] numbers;
+    String bonus;
 
 
     @Override
@@ -71,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
     // 레이아웃 초기화
     public void init(){
-        lotto = (Button)findViewById(R.id.lotto);
-        year = (Button)findViewById(R.id.year);
+        numbers = new String[6];
+        bonus = "";
         lotto_occur = (Button)findViewById(R.id.lotto_occur);
         lotto_input = (Button)findViewById(R.id.lotto_input);
         lotto_static = (Button)findViewById(R.id.lotto_static);
-        year_occur = (Button)findViewById(R.id.year_occur);
-        year_input = (Button)findViewById(R.id.year_input);
-        year_confirm = (Button)findViewById(R.id.year_confirm);
+        year_occur = (Button)findViewById(R.id.lotto_qr);
+        year_input = (Button)findViewById(R.id.select_number_occur);
+        year_confirm = (Button)findViewById(R.id.select_number_confirm);
         occur_confirm = (Button)findViewById(R.id.occur_confirm);
         input_confirm = (Button)findViewById(R.id.input_confirm);
         lotto_confirm = (Button)findViewById(R.id.lotto_confirm);
@@ -87,18 +95,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent;
                 switch(v.getId()){
-                    case R.id.lotto:
-                        break;
-                    case R.id.year:
-                        break;
                     case R.id.lotto_occur:
                         intent = new Intent(getApplicationContext(), Lotto_occur_number.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("round", curRound);
                         startActivity(intent);
                         break;
                     case R.id.lotto_input:
                         intent = new Intent(getApplicationContext(), Lotto_input_number.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
                         break;
                     case R.id.lotto_static:
@@ -106,29 +111,54 @@ public class MainActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                         break;
-                    case R.id.year_occur:
-                        intent = new Intent(getApplicationContext(), Year_occur_number.class);
+                    case R.id.lotto_qr:
+                        intent = new Intent(getApplicationContext(), Lotto_QR.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                         break;
-                    case R.id.year_input:
-                        intent = new Intent(getApplicationContext(), Year_input_number.class);
+                    case R.id.select_number_occur:
+                        intent = new Intent(getApplicationContext(), Select_number_occur.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("round", curRound);
                         startActivity(intent);
                         break;
-                    case R.id.year_confirm:
-                        intent = new Intent(getApplicationContext(), Year_confirm.class);
+                    case R.id.select_number_confirm:
+                        intent = new Intent(getApplicationContext(), Select_number_confirm.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("round", curRound);
+                        intent.putExtra("num1", numbers[0]);
+                        intent.putExtra("num2", numbers[1]);
+                        intent.putExtra("num3", numbers[2]);
+                        intent.putExtra("num4", numbers[3]);
+                        intent.putExtra("num5", numbers[4]);
+                        intent.putExtra("num6", numbers[5]);
+                        intent.putExtra("bonus", bonus);
                         startActivity(intent);
                         break;
                     case R.id.occur_confirm:
                         intent = new Intent(getApplicationContext(), Occur_confirm.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("round", curRound);
+                        intent.putExtra("num1", numbers[0]);
+                        intent.putExtra("num2", numbers[1]);
+                        intent.putExtra("num3", numbers[2]);
+                        intent.putExtra("num4", numbers[3]);
+                        intent.putExtra("num5", numbers[4]);
+                        intent.putExtra("num6", numbers[5]);
+                        intent.putExtra("bonus", bonus);
                         startActivity(intent);
                         break;
                     case R.id.input_confirm:
                         intent = new Intent(getApplicationContext(), Input_confirm.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        intent.putExtra("round", curRound);
+                        intent.putExtra("num1", numbers[0]);
+                        intent.putExtra("num2", numbers[1]);
+                        intent.putExtra("num3", numbers[2]);
+                        intent.putExtra("num4", numbers[3]);
+                        intent.putExtra("num5", numbers[4]);
+                        intent.putExtra("num6", numbers[5]);
+                        intent.putExtra("bonus", bonus);
                         startActivity(intent);
                         break;
                     case R.id.lotto_confirm:
@@ -139,8 +169,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        lotto.setOnClickListener(onClickListener);
-        year.setOnClickListener(onClickListener);
         lotto_occur.setOnClickListener(onClickListener);
         lotto_input.setOnClickListener(onClickListener);
         lotto_static.setOnClickListener(onClickListener);
@@ -202,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
                 int resId = 0;
                 for (int i = 0; i < lotto_number.length - 1; i++) {
                     String temp = "ball_" + jsonObject.get(lotto_number[i]);
+                    numbers[i] = jsonObject.get(lotto_number[i]) + "";
                     resId = getResources().getIdentifier(temp, "drawable", getPackageName());
                     ImageView image = new ImageView(getApplicationContext());
                     image.setImageResource(resId);
@@ -216,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageView image = new ImageView(getApplicationContext());
                 image.setImageResource(getResources().getIdentifier("ball_" + jsonObject.get(lotto_number[lotto_number.length-1]), "drawable", getPackageName()));
                 linearLayout.addView(image);
+                bonus = jsonObject.get(lotto_number[lotto_number.length-1]) + "";
                 //당첨결과, 당첨금, 당첨날짜
                 TextView textView1 = findViewById(R.id.temp1);
                 TextView textView2 = findViewById(R.id.temp2);

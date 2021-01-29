@@ -5,10 +5,9 @@
     android:orientation="vertical">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,9 +15,10 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/occur_confirm_recyclerview"
+                android:id="@+id/select_number_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

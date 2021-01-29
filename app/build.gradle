@@ -43,5 +43,14 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     // 웹크롤링
     implementation 'org.jsoup:jsoup:1.11.3'
-
+    // 룸데이터 베이스
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+    // 로또 QR코드
+    implementation 'com.journeyapps:zxing-android-embedded:4.0.0'
+    implementation 'com.google.zxing:core:3.3.0'
 }

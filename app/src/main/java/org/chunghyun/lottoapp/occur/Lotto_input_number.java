@@ -1,36 +1,34 @@
-package org.chunghyun.lottoapp;
+package org.chunghyun.lottoapp.occur;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import org.chunghyun.lottoapp.R;
+import org.chunghyun.lottoapp.confirm.Input_confirm;
+import org.chunghyun.lottoapp.database.Lotto_Input_MyEntity;
+import org.chunghyun.lottoapp.database.MyDatabase;
 import org.chunghyun.lottoapp.dialog.Dialog_Lotto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Lotto_input_number extends AppCompatActivity {
 
     Button saveButton;
-    Button before_input_confirm;
     LinearLayout linearLayout_A;
     LinearLayout linearLayout_B;
     LinearLayout linearLayout_C;
@@ -42,6 +40,9 @@ public class Lotto_input_number extends AppCompatActivity {
     ArrayList<String> select_number_D;
     ArrayList<String> select_number_E;
     TextView round;
+    String title;
+    // 데이터 베이스 관련
+    MyDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,27 +54,61 @@ public class Lotto_input_number extends AppCompatActivity {
     public void init(){
 
         saveButton = findViewById(R.id.save_input_num);
-        before_input_confirm = findViewById(R.id.before_input_confirm);
-        // 번호 저장 데이터 베이스 구축 해야함 - 미완료
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
+        select_number_A = new ArrayList<>();
+        select_number_B = new ArrayList<>();
+        select_number_C = new ArrayList<>();
+        select_number_D = new ArrayList<>();
+        select_number_E = new ArrayList<>();
+        // 데이터베이스 관련
+        title = "";
+        db = MyDatabase.getDatabase(getApplicationContext());
         // 이전 수동 번호 발생 확인
-        before_input_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Input_confirm.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-            }
-        });
         //회차 정보 최신화
         updateRoundInfo();
         //라인 클릭
         lineClick();
+        // 번호 저장 데이터 베이스 구축 해야함 - 미완료
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!select_number_A.isEmpty()){
+                    new Thread(() ->{
+                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_A.get(0),select_number_A.get(1)
+                                ,select_number_A.get(2),select_number_A.get(3),select_number_A.get(4),select_number_A.get(5),"미추첨");
+                        db.myDao().insert(lotto_input_myEntity);
+                    }).start();
+                }
+                if(!select_number_B.isEmpty()){
+                    new Thread(() ->{
+                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_B.get(0),select_number_B.get(1)
+                                ,select_number_B.get(2),select_number_B.get(3),select_number_B.get(4),select_number_B.get(5),"미추첨");
+                        db.myDao().insert(lotto_input_myEntity);
+                    }).start();
+                }
+                if(!select_number_C.isEmpty()){
+                    new Thread(() ->{
+                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_C.get(0),select_number_C.get(1)
+                                ,select_number_C.get(2),select_number_C.get(3),select_number_C.get(4),select_number_C.get(5),"미추첨");
+                        db.myDao().insert(lotto_input_myEntity);
+                    }).start();
+                }
+                if(!select_number_D.isEmpty()){
+                    new Thread(() ->{
+                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_D.get(0),select_number_D.get(1)
+                                ,select_number_D.get(2),select_number_D.get(3),select_number_D.get(4),select_number_D.get(5),"미추첨");
+                        db.myDao().insert(lotto_input_myEntity);
+                    }).start();
+                }
+                if(!select_number_E.isEmpty()){
+                    new Thread(() ->{
+                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_E.get(0),select_number_E.get(1)
+                                ,select_number_E.get(2),select_number_E.get(3),select_number_E.get(4),select_number_E.get(5),"미추첨");
+                        db.myDao().insert(lotto_input_myEntity);
+                    }).start();
+                }
+                Toast.makeText(getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     class add_view implements  View.OnClickListener{
 
@@ -178,7 +213,7 @@ public class Lotto_input_number extends AppCompatActivity {
     }
     // 웹크롤링을 통한 현재 회차 정보 가져오기
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void>{
-        String title = "";
+
         @Override
         protected Void doInBackground(Void... voids) {
             try{
@@ -193,7 +228,7 @@ public class Lotto_input_number extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            round.setText(title + " 회차");
+            round.setText((Integer.parseInt(title) + 1) + " 회차");
         }
     }
 }

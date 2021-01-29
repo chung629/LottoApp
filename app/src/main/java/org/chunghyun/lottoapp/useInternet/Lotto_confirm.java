@@ -1,4 +1,4 @@
-package org.chunghyun.lottoapp;
+package org.chunghyun.lottoapp.useInternet;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.chunghyun.lottoapp.R;
 import org.chunghyun.lottoapp.adapter.Lotto_confirm_adapter;
 import org.chunghyun.lottoapp.adapter.Lotto_static_adapter;
 import org.chunghyun.lottoapp.dialog.ProgressDialog;
