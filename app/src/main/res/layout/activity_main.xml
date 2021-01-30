@@ -63,33 +63,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical|center"
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/lotto_occur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="로또 번호 발생" />
+                android:drawableTop="@drawable/ic_random"
+                android:text="랜덤 번호" />
 
             <Button
                 android:id="@+id/lotto_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="로또 번호 수동 입력" />
+                android:drawableTop="@drawable/ic_input"
+                android:text="수동 입력" />
 
             <Button
                 android:id="@+id/select_number_occur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:drawableTop="@drawable/ic_combination"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="선택번호 조합 발생" />
+                android:text="조합 발생" />
 
         </LinearLayout>
 
@@ -97,32 +101,36 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical|center"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/occur_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
+                android:drawableTop="@drawable/ic_confirm"
                 android:layout_weight="1"
                 android:text="발생번호 확인" />
 
             <Button
-                android:layout_margin="10dp"
                 android:id="@+id/input_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130dp"
+                android:layout_margin="2dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="수동 번호 확인" />
+                android:drawableTop="@drawable/ic_confirm"
+                android:text="수동번호 확인" />
 
             <Button
                 android:id="@+id/select_number_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_margin="2dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="선택번호 조합 확인" />
+                android:drawableTop="@drawable/ic_confirm"
+                android:text="선택조합 확인" />
 
         </LinearLayout>
         <LinearLayout
@@ -130,31 +138,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center_vertical|center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/lotto_static"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="로또 번호 통계" />
+                android:drawableTop="@drawable/ic_static"
+                android:text="로또 통계" />
 
             <Button
                 android:id="@+id/lotto_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="로또 당첨번호 확인" />
+                android:drawableTop="@drawable/ic_victory"
+                android:text="당첨번호" />
 
             <Button
-                android:layout_margin="10dp"
                 android:id="@+id/lotto_qr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="QR코드 입력" />
+                android:drawableTop="@drawable/ic_qr"
+                android:text="QR코드" />
 
         </LinearLayout>
     </LinearLayout>

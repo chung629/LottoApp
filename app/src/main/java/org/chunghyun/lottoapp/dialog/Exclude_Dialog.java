@@ -1,0 +1,123 @@
+package org.chunghyun.lottoapp.dialog;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import org.chunghyun.lottoapp.R;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Exclude_Dialog extends Dialog {
+
+    private Context context;
+    private DialogClickListener dialogClickListener;
+    private Button yes, no;
+    private TextView[] textView;
+    private ArrayList<String> selectNumber;
+    private boolean isClick[];
+    private ArrayList<String> prev;
+    private ArrayList<String> include;
+
+    public interface DialogClickListener {
+        void onPositiveClick(ArrayList<String> selectNumber);
+    }
+    public Exclude_Dialog(@NonNull Context context, ArrayList<String> prev, ArrayList<String> include) {
+        super(context);
+        this.context = context;
+        this.prev = prev;
+        this.include = include;
+    }
+    //리스너 초기화
+    public void setDialogListener(Exclude_Dialog.DialogClickListener dialogListener){
+        this.dialogClickListener = dialogListener;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_lotto);
+        init();
+    }
+
+    public void init(){
+        isClick = new boolean[45];
+        selectNumber = new ArrayList<String>();
+        textView = new TextView[45];
+        for(int i=1; i<=45; i++){
+            int resId = context.getResources().getIdentifier("dialog_" + i, "id", context.getPackageName());
+            textView[i-1] = findViewById(resId);
+            textView[i-1].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int temp = 0;
+                    for(int i=1; i<=45; i++){
+                        if(v.getId() == context.getResources().getIdentifier("dialog_" + i, "id", context.getPackageName())){
+                            if(isClick[i-1])
+                                isClick[i-1] = false;
+                            else
+                                isClick[i-1] = true;
+                            temp = i-1;
+                            break;
+                        }
+                    }
+                    if(isClick[temp]) {
+                        if(include.contains(temp+1 + "")){
+                            Toast.makeText(getContext(), "포함수에 선택된 번호 입니다.", Toast.LENGTH_SHORT).show();
+                            isClick[temp] = false;
+                        }else if(prev.contains(temp+1 + "")){
+                            Toast.makeText(getContext(), "이전회차 포함수에 선택된 번호 입니다.", Toast.LENGTH_SHORT).show();
+                            isClick[temp] = false;
+                        }else {
+                            if (selectNumber.size() < 10) {
+                                if (temp < 10)
+                                    v.setBackground(context.getDrawable(R.drawable.dialog_ball1_10));
+                                else if (temp < 20 && temp >= 10)
+                                    v.setBackground(context.getDrawable(R.drawable.dialog_ball11_20));
+                                else if (temp < 30 && temp >= 20)
+                                    v.setBackground(context.getDrawable(R.drawable.dialog_ball21_30));
+                                else if (temp < 40 && temp >= 30)
+                                    v.setBackground(context.getDrawable(R.drawable.dialog_ball31_40));
+                                else
+                                    v.setBackground(context.getDrawable(R.drawable.dialog_ball41_45));
+                                selectNumber.add(temp + 1 + "");
+                            } else {
+                                Toast.makeText(getContext(), "최대 10개의 숫자만 선택 가능 합니다", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } else{
+                        selectNumber.remove(temp+1 + "");
+                        v.setBackground(context.getDrawable(R.drawable.dialog_ball));
+                    }
+                }
+            });
+        }
+        yes = findViewById(R.id.lotto_yes);
+        no = findViewById(R.id.lotto_no);
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectNumber.size() == 0){
+                    Toast.makeText(getContext(), "1개 이상의 번호를 선택 해주세요", Toast.LENGTH_SHORT).show();
+                }else{
+                    Collections.sort(selectNumber, (a,b)-> Integer.compare(Integer.parseInt(a), Integer.parseInt(b)));
+                    dialogClickListener.onPositiveClick(selectNumber);
+                    dismiss();
+                }
+            }
+        });
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+    }
+}

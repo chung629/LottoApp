@@ -47,6 +47,7 @@ public class Lotto_static extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_static);
+        getSupportActionBar().setTitle("로또 번호별 통계");
 
         init();
     }

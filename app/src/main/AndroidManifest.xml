@@ -27,7 +27,7 @@
         <activity android:name=".confirm.Input_confirm"/>
         <activity android:name=".useInternet.Lotto_confirm"/>
         <activity android:name=".occur.Lotto_input_number"/>
-        <activity android:name=".Lotto_occur_number"/>
+        <activity android:name=".occur.Lotto_occur_number"/>
         <activity android:name=".useInternet.Lotto_static"/>
         <activity android:name=".confirm.Occur_confirm"/>
         <activity android:name=".confirm.Select_number_confirm"/>

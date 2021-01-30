@@ -35,6 +35,7 @@ public class Lotto_QR extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_qr);
+        getSupportActionBar().setTitle("QR코드 입력");
         et = findViewById(R.id.et);
         wv = findViewById(R.id.wv);
         bt = findViewById(R.id.bt);

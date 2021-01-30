@@ -31,6 +31,7 @@ import org.chunghyun.lottoapp.confirm.Input_confirm;
 import org.chunghyun.lottoapp.confirm.Occur_confirm;
 import org.chunghyun.lottoapp.confirm.Select_number_confirm;
 import org.chunghyun.lottoapp.occur.Lotto_input_number;
+import org.chunghyun.lottoapp.occur.Lotto_occur_number;
 import org.chunghyun.lottoapp.occur.Select_number_occur;
 import org.chunghyun.lottoapp.useInternet.Lotto_QR;
 import org.chunghyun.lottoapp.useInternet.Lotto_confirm;
@@ -99,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(), Lotto_occur_number.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         intent.putExtra("round", curRound);
+                        intent.putExtra("num1", numbers[0]);
+                        intent.putExtra("num2", numbers[1]);
+                        intent.putExtra("num3", numbers[2]);
+                        intent.putExtra("num4", numbers[3]);
+                        intent.putExtra("num5", numbers[4]);
+                        intent.putExtra("num6", numbers[5]);
+                        intent.putExtra("bonus", bonus);
                         startActivity(intent);
                         break;
                     case R.id.lotto_input:
@@ -229,8 +237,8 @@ public class MainActivity extends AppCompatActivity {
                 jsonObject = (JsonObject) JsonParser.parseString(response);
                 int resId = 0;
                 for (int i = 0; i < lotto_number.length - 1; i++) {
-                    String temp = "ball_" + jsonObject.get(lotto_number[i]);
                     numbers[i] = jsonObject.get(lotto_number[i]) + "";
+                    String temp = "ball_" + numbers[i];
                     resId = getResources().getIdentifier(temp, "drawable", getPackageName());
                     ImageView image = new ImageView(getApplicationContext());
                     image.setImageResource(resId);
@@ -243,9 +251,10 @@ public class MainActivity extends AppCompatActivity {
                 textView.setTextSize(40);
                 linearLayout.addView(textView);
                 ImageView image = new ImageView(getApplicationContext());
-                image.setImageResource(getResources().getIdentifier("ball_" + jsonObject.get(lotto_number[lotto_number.length-1]), "drawable", getPackageName()));
-                linearLayout.addView(image);
                 bonus = jsonObject.get(lotto_number[lotto_number.length-1]) + "";
+                image.setImageResource(getResources().getIdentifier("ball_" + bonus, "drawable", getPackageName()));
+                linearLayout.addView(image);
+
                 //당첨결과, 당첨금, 당첨날짜
                 TextView textView1 = findViewById(R.id.temp1);
                 TextView textView2 = findViewById(R.id.temp2);

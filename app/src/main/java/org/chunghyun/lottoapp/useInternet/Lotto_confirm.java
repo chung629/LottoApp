@@ -52,6 +52,7 @@ public class Lotto_confirm extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_number_confirm);
+        getSupportActionBar().setTitle("로또 당첨번호 확인");
         init();
     }
 

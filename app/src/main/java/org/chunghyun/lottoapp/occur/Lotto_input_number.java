@@ -3,6 +3,7 @@ package org.chunghyun.lottoapp.occur;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.chunghyun.lottoapp.R;
 import org.chunghyun.lottoapp.confirm.Input_confirm;
@@ -28,27 +34,62 @@ import java.util.ArrayList;
 
 public class Lotto_input_number extends AppCompatActivity {
 
-    Button saveButton;
-    LinearLayout linearLayout_A;
-    LinearLayout linearLayout_B;
-    LinearLayout linearLayout_C;
-    LinearLayout linearLayout_D;
-    LinearLayout linearLayout_E;
-    ArrayList<String> select_number_A;
-    ArrayList<String> select_number_B;
-    ArrayList<String> select_number_C;
-    ArrayList<String> select_number_D;
-    ArrayList<String> select_number_E;
-    TextView round;
-    String title;
+    private Button saveButton;
+    private LinearLayout linearLayout_A;
+    private LinearLayout linearLayout_B;
+    private LinearLayout linearLayout_C;
+    private  LinearLayout linearLayout_D;
+    private LinearLayout linearLayout_E;
+    private ArrayList<String> select_number_A;
+    private ArrayList<String> select_number_B;
+    private ArrayList<String> select_number_C;
+    private  ArrayList<String> select_number_D;
+    private ArrayList<String> select_number_E;
+    private TextView round;
+    private  String title;
     // 데이터 베이스 관련
-    MyDatabase db;
+    private MyDatabase db;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_input_number);
+        getSupportActionBar().setTitle("수동번호 선택");
+        adFunction();
         init();
+    }
+    // 애드몹 관련
+    public void adFunction(){
+        // 광고 관련
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        mAdView = findViewById(R.id.input_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        // 광고가 제대로 로드 되는지 테스트 하기 위한 코드입니다.
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                // 광고가 문제 없이 로드시 출력됩니다.
+                Log.d("@@@", "onAdLoaded");
+            }
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                // 광고 로드에 문제가 있을시 출력됩니다.
+                Log.d("@@@", "onAdFailedToLoad " + errorCode);
+            }
+            @Override
+            public void onAdOpened() { }
+            @Override
+            public void onAdClicked() { }
+            @Override
+            public void onAdLeftApplication() { }
+            @Override
+            public void onAdClosed() { }
+        });
+        // 광고 끝
     }
 
     public void init(){
