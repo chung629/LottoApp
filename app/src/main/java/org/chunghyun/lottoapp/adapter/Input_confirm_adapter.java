@@ -1,6 +1,8 @@
 package org.chunghyun.lottoapp.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import org.chunghyun.lottoapp.R;
 import org.chunghyun.lottoapp.database.Lotto_Input_MyEntity;
+import org.chunghyun.lottoapp.database.Lotto_Input_MyEntity;
 import org.chunghyun.lottoapp.database.MyDatabase;
 import org.chunghyun.lottoapp.dialog.Confirm_Dialog;
+import org.chunghyun.lottoapp.dialog.Dialog_Lotto;
+import org.chunghyun.lottoapp.dialog.Occur_Dialog;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
 public class Input_confirm_adapter extends RecyclerView.Adapter<Input_confirm_adapter.ViewHolder>{
 
     ArrayList<Lotto_Input_MyEntity> items = new ArrayList<>();
@@ -35,7 +44,7 @@ public class Input_confirm_adapter extends RecyclerView.Adapter<Input_confirm_ad
     @Override
     public Input_confirm_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_input_confirm, parent, false);
-        return new ViewHolder(view);
+        return new Input_confirm_adapter.ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull Input_confirm_adapter.ViewHolder holder, int position) {
@@ -48,7 +57,7 @@ public class Input_confirm_adapter extends RecyclerView.Adapter<Input_confirm_ad
         holder.num6.setText(items.get(position).getNum6());
         int count = 0;
         String result = "";
-        if(items.get(position).getRound() == round){
+        if(items.get(position).getRound().equals(round) && items.get(position).getResult().equals("미추첨")){
             count = items.get(position).countCollect(numbers);
             if(items.get(position).countBonus(bonus)){
                 count++;
@@ -91,11 +100,10 @@ public class Input_confirm_adapter extends RecyclerView.Adapter<Input_confirm_ad
             }
         });
     }
-
     public void editData(int index, String result){
         new Thread(()->{
             items.get(index).setResult(result);
-            db.myDao().update(items.get(index));
+            db.inputDao().update(items.get(index));
         }).start();
     }
     public int returnResId(String num){
@@ -119,8 +127,7 @@ public class Input_confirm_adapter extends RecyclerView.Adapter<Input_confirm_ad
 
     public void setItem(List<Lotto_Input_MyEntity> data){
         items = new ArrayList<>(data);
-
-
+        Collections.reverse(items);
         notifyDataSetChanged();
     }
 

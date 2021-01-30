@@ -75,12 +75,7 @@ public class Select_number_confirm extends AppCompatActivity {
         // 광고 끝
     }
     void init(){
-        recyclerView = findViewById(R.id.select_number_recyclerview);
-        db = MyDatabase.getDatabase(getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new Select_confirm_adapter(db, Select_number_confirm.this, round, numbers, bonus);
-        recyclerView.setAdapter(adapter);
+
         round = "";
         numbers = new ArrayList<>();
         bonus = "";
@@ -93,7 +88,12 @@ public class Select_number_confirm extends AppCompatActivity {
         numbers.add(intent.getExtras().getString("num5"));
         numbers.add(intent.getExtras().getString("num6"));
         bonus = intent.getExtras().getString("bonus");
-
+        recyclerView = findViewById(R.id.select_number_recyclerview);
+        db = MyDatabase.getDatabase(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new Select_confirm_adapter(db, Select_number_confirm.this, round, numbers, bonus);
+        recyclerView.setAdapter(adapter);
         db.selectDao().getAll().observe(this, new Observer<List<Lotto_Select_MyEntity>>() {
             @Override
             public void onChanged(List<Lotto_Select_MyEntity> lotto_select_myEntities) {

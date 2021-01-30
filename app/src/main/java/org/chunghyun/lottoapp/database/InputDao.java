@@ -11,7 +11,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface MyDao {
+public interface InputDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) // 중복 ID일경우 교체
     public void insert(Lotto_Input_MyEntity entity);

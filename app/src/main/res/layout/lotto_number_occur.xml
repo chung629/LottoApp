@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="이전회차 번호 넣기 - 최대 5개 (포함수 선택 포함)" />
+            android:text="이전회차 번호 넣기 - 최대5개" />
 
         <Button
             android:id="@+id/occur_prev_initButton"
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="포함수 - 최대 5개 (이전회차 선택 포함)" />
+            android:text="포함수 - 최대5개" />
 
         <Button
             android:id="@+id/occur_include_initButton"
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="제외수 - 최대 10개" />
+            android:text="제외수 - 최대10개" />
         <Button
             android:id="@+id/occur_exclude_initButton"
             android:layout_width="wrap_content"

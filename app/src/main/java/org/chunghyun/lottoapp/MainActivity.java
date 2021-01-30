@@ -1,13 +1,20 @@
 package org.chunghyun.lottoapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +33,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
 
 import org.chunghyun.lottoapp.confirm.Input_confirm;
 import org.chunghyun.lottoapp.confirm.Occur_confirm;
@@ -44,7 +53,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
 
     private AdView mAdView;
     private Button lotto_occur;
@@ -57,24 +66,62 @@ public class MainActivity extends AppCompatActivity {
     private Button input_confirm;
     private Button lotto_confirm;
     // 로또 API
-    JsonObject jsonObject;
-    RequestQueue requestQueue;
-    String curRound;
-    String[] numbers;
-    String bonus;
+    private JsonObject jsonObject;
+    private RequestQueue requestQueue;
+    private String curRound;
+    private String[] numbers;
+    private String bonus;
+    private ConnectivityManager connectivityManager;
+    // 카메라
+    private boolean useCamera;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // 인터넷 연결 확인
+        checkInternetState();
         adFunction();
         init();
 
+        AutoPermissions.Companion.loadAllPermissions(this, 101);
         // 로또 API 관련
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+    }
+
+
+    @Override
+    public void onDenied(int i, String[] strings) {
+
+    }
+
+    @Override
+    public void onGranted(int i, String[] strings) {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
+    }
+
+    private void checkInternetState(){
+        connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert  connectivityManager != null;
+        if(!(connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected())){
+            new AlertDialog.Builder(this)
+                    .setMessage("당첨번호 조회를 위해 인터넷 연결이 필요합니다.")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                        }
+                    }).show();
         }
     }
 
@@ -91,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
         occur_confirm = (Button)findViewById(R.id.occur_confirm);
         input_confirm = (Button)findViewById(R.id.input_confirm);
         lotto_confirm = (Button)findViewById(R.id.lotto_confirm);
+        occur_confirm.setSelected(true);
+        input_confirm.setSelected(true);
+        year_confirm.setSelected(true);
         Button.OnClickListener onClickListener = new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -112,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.lotto_input:
                         intent = new Intent(getApplicationContext(), Lotto_input_number.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("round", curRound);
                         startActivity(intent);
                         break;
                     case R.id.lotto_static:
@@ -172,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.lotto_confirm:
                         intent = new Intent(getApplicationContext(), Lotto_confirm.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("round", curRound);
                         startActivity(intent);
                         break;
                 }
@@ -238,23 +290,17 @@ public class MainActivity extends AppCompatActivity {
                 int resId = 0;
                 for (int i = 0; i < lotto_number.length - 1; i++) {
                     numbers[i] = jsonObject.get(lotto_number[i]) + "";
-                    String temp = "ball_" + numbers[i];
-                    resId = getResources().getIdentifier(temp, "drawable", getPackageName());
-                    ImageView image = new ImageView(getApplicationContext());
-                    image.setImageResource(resId);
-                    image.setScaleType(ImageView.ScaleType.CENTER);
-                    linearLayout.addView(image);
+                    createMainView(linearLayout, numbers[i]);
                 }
                 TextView textView = new TextView(getApplicationContext());
                 textView.setText(" + ");
+                textView.setTextColor(Color.WHITE);
                 textView.setGravity(Gravity.CENTER_VERTICAL);
-                textView.setTextSize(40);
+                textView.setTextSize(30);
                 linearLayout.addView(textView);
-                ImageView image = new ImageView(getApplicationContext());
-                bonus = jsonObject.get(lotto_number[lotto_number.length-1]) + "";
-                image.setImageResource(getResources().getIdentifier("ball_" + bonus, "drawable", getPackageName()));
-                linearLayout.addView(image);
 
+                bonus = jsonObject.get(lotto_number[lotto_number.length-1]) + "";
+                createMainView(linearLayout, bonus);
                 //당첨결과, 당첨금, 당첨날짜
                 TextView textView1 = findViewById(R.id.temp1);
                 TextView textView2 = findViewById(R.id.temp2);
@@ -282,12 +328,14 @@ public class MainActivity extends AppCompatActivity {
         request.setShouldCache(false); // 캐싱하지 말고 매번 받은것은 다시 보여주도록 설정
         requestQueue.add(request);
     }
+
+
     // 웹크롤링을 통한 현재 회차 정보 가져오기
     private class JsoupAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                Document doc = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get();
+                Document doc = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main&mainMode=default").get();
                 Elements round = doc.select("#lottoDrwNo");
                 curRound = round.text();
                 requestLottoNumber(curRound);
@@ -296,5 +344,29 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+    public void createMainView(LinearLayout linearLayout, String number){
+        TextView textView = new TextView(this);
+        textView.setText(number);
+        textView.setTextSize(18);
+        textView.setTextColor(Color.WHITE);
+        textView.setTypeface(Typeface.DEFAULT_BOLD);
+        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER);
+        int num = Integer.parseInt(number);
+        if(num >=1 && num <= 10){
+            textView.setBackgroundResource(R.drawable.main_ball1_10);
+        }else if(num >=11 && num <= 20){
+            textView.setBackgroundResource(R.drawable.main_ball11_20);
+        }else if(num >=21 && num <= 30){
+            textView.setBackgroundResource(R.drawable.main_ball21_30);
+        }else if(num >=31 && num <= 40){
+            textView.setBackgroundResource(R.drawable.main_ball31_40);
+        }else{
+            textView.setBackgroundResource(R.drawable.main_ball41_45);
+        }
+        LinearLayout.LayoutParams tmp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        tmp.setMargins(10, 10, 10, 0);
+        textView.setLayoutParams(tmp);
+        linearLayout.addView(textView);
     }
 }

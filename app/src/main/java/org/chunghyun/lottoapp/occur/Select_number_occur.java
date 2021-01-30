@@ -84,13 +84,13 @@ public class Select_number_occur extends AppCompatActivity {
         numberAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectNumberAdd.clear();
-                gridLayout.removeAllViews();
+
                 Select_Dialog_Lotto select_dialog_lotto = new Select_Dialog_Lotto(Select_number_occur.this);
                 select_dialog_lotto.setDialogListener(new Select_Dialog_Lotto.DialogClickListener() {
                     @Override
                     public void onPositiveClick(ArrayList<String> selectNumber) {
                         selectNumberAdd = new ArrayList<>(selectNumber);
+                        gridLayout.removeAllViews();
                         for(int i=0; i<selectNumberAdd.size(); i++){
                             createTextView(selectNumber.get(i));
                         }

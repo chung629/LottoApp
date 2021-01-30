@@ -1,5 +1,6 @@
 package org.chunghyun.lottoapp.useInternet;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,6 +55,7 @@ public class Lotto_confirm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lotto_number_confirm);
         getSupportActionBar().setTitle("로또 당첨번호 확인");
+        Toast.makeText(this, "당첨 정보를 받아오고 있습니다.", Toast.LENGTH_SHORT).show();
         init();
     }
 
@@ -63,7 +66,6 @@ public class Lotto_confirm extends AppCompatActivity {
         numbers = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        progressDialog.setCancelable(false);
         progressDialog.show();
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
@@ -76,9 +78,8 @@ public class Lotto_confirm extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                Document doc = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get();
-                Elements round = doc.select("#lottoDrwNo");
-                curRound = Integer.parseInt(round.text().toString());
+                Intent intent = getIntent();
+                curRound = Integer.parseInt(intent.getExtras().get("round").toString());
                 if(curRound % 10 != 0){
                     curRound = curRound / 10 + 1;
                 }
@@ -94,7 +95,7 @@ public class Lotto_confirm extends AppCompatActivity {
                     }
                 }
             }catch(IOException e){
-                e.printStackTrace();
+                Toast.makeText(Lotto_confirm.this, "데이터를 받아오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
             return null;
         }

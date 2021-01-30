@@ -28,6 +28,7 @@ import org.chunghyun.lottoapp.dialog.Dialog_Lotto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,7 +94,6 @@ public class Lotto_input_number extends AppCompatActivity {
     }
 
     public void init(){
-
         saveButton = findViewById(R.id.save_input_num);
         select_number_A = new ArrayList<>();
         select_number_B = new ArrayList<>();
@@ -108,48 +108,49 @@ public class Lotto_input_number extends AppCompatActivity {
         updateRoundInfo();
         //라인 클릭
         lineClick();
-        // 번호 저장 데이터 베이스 구축 해야함 - 미완료
+        // 번호 저장 데이터 베이스
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!select_number_A.isEmpty()){
-                    new Thread(() ->{
-                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_A.get(0),select_number_A.get(1)
-                                ,select_number_A.get(2),select_number_A.get(3),select_number_A.get(4),select_number_A.get(5),"미추첨");
-                        db.myDao().insert(lotto_input_myEntity);
-                    }).start();
-                }
-                if(!select_number_B.isEmpty()){
-                    new Thread(() ->{
-                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_B.get(0),select_number_B.get(1)
-                                ,select_number_B.get(2),select_number_B.get(3),select_number_B.get(4),select_number_B.get(5),"미추첨");
-                        db.myDao().insert(lotto_input_myEntity);
-                    }).start();
-                }
-                if(!select_number_C.isEmpty()){
-                    new Thread(() ->{
-                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_C.get(0),select_number_C.get(1)
-                                ,select_number_C.get(2),select_number_C.get(3),select_number_C.get(4),select_number_C.get(5),"미추첨");
-                        db.myDao().insert(lotto_input_myEntity);
-                    }).start();
-                }
-                if(!select_number_D.isEmpty()){
-                    new Thread(() ->{
-                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_D.get(0),select_number_D.get(1)
-                                ,select_number_D.get(2),select_number_D.get(3),select_number_D.get(4),select_number_D.get(5),"미추첨");
-                        db.myDao().insert(lotto_input_myEntity);
-                    }).start();
-                }
-                if(!select_number_E.isEmpty()){
-                    new Thread(() ->{
-                        Lotto_Input_MyEntity lotto_input_myEntity = new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_E.get(0),select_number_E.get(1)
-                                ,select_number_E.get(2),select_number_E.get(3),select_number_E.get(4),select_number_E.get(5),"미추첨");
-                        db.myDao().insert(lotto_input_myEntity);
-                    }).start();
-                }
+                new Thread(() ->{
+                    if(!select_number_A.isEmpty()){
+                        db.inputDao().insert(new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_A.get(0),select_number_A.get(1)
+                                ,select_number_A.get(2),select_number_A.get(3),select_number_A.get(4),select_number_A.get(5),"미추첨"));
+                    }
+                    if(!select_number_B.isEmpty()){
+                        db.inputDao().insert(new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_B.get(0),select_number_B.get(1)
+                                ,select_number_B.get(2),select_number_B.get(3),select_number_B.get(4),select_number_B.get(5),"미추첨"));
+                    }
+                    if(!select_number_C.isEmpty()){
+                        db.inputDao().insert(new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_C.get(0),select_number_C.get(1)
+                                ,select_number_C.get(2),select_number_C.get(3),select_number_C.get(4),select_number_C.get(5),"미추첨"));
+                    }
+                    if(!select_number_D.isEmpty()){
+                        db.inputDao().insert(new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_D.get(0),select_number_D.get(1)
+                                ,select_number_D.get(2),select_number_D.get(3),select_number_D.get(4),select_number_D.get(5),"미추첨"));
+                    }
+                    if(!select_number_E.isEmpty()){
+                        db.inputDao().insert(new Lotto_Input_MyEntity((Integer.parseInt(title) + 1) + "", select_number_E.get(0),select_number_E.get(1)
+                                ,select_number_E.get(2),select_number_E.get(3),select_number_E.get(4),select_number_E.get(5),"미추첨"));
+                    }
+                }).start();
                 Toast.makeText(getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public int returnResource(String number){
+        int num = Integer.parseInt(number);
+        if(num >=1 && num <= 10){
+            return R.drawable.common_ball1_10;
+        }else if(num >=11 && num <= 20){
+            return R.drawable.common_ball11_20;
+        }else if(num >=21 && num <= 30){
+            return R.drawable.common_ball21_30;
+        }else if(num >=31 && num <= 40){
+            return R.drawable.common_ball31_40;
+        }else{
+            return R.drawable.common_ball41_45;
+        }
     }
     class add_view implements  View.OnClickListener{
 
@@ -182,10 +183,11 @@ public class Lotto_input_number extends AppCompatActivity {
                             select_number_E = new ArrayList<String>(selectNumber);
                             break;
                     }
-                    ImageView imageViews[] = new ImageView[6];
+                    TextView textViews[] = new TextView[6];
                     for(int i=0; i<6; i++){
-                        imageViews[i] = findViewById(getResources().getIdentifier(str + "_" + (i+1), "id", getPackageName()));
-                        imageViews[i].setImageDrawable(ContextCompat.getDrawable(Lotto_input_number.this, getResources().getIdentifier("ball_" + selectNumber.get(i), "drawable", getPackageName())));
+                        textViews[i] = findViewById(getResources().getIdentifier(str + "_" + (i+1), "id", getPackageName()));
+                        textViews[i].setBackgroundResource(returnResource(selectNumber.get(i)));
+                        textViews[i].setText(selectNumber.get(i) + "");
                     }
                 }
             });
@@ -202,25 +204,25 @@ public class Lotto_input_number extends AppCompatActivity {
         public void onClick(View v) {
             switch (str){
                 case "A":
-                    select_number_A = new ArrayList<>();
+                    select_number_A.clear();
                     break;
                 case "B":
-                    select_number_B = new ArrayList<>();
+                    select_number_B.clear();
                     break;
                 case "C":
-                    select_number_C = new ArrayList<>();
+                    select_number_C.clear();
                     break;
                 case "D":
-                    select_number_D = new ArrayList<>();
+                    select_number_D.clear();
                     break;
                 case "E":
-                    select_number_E = new ArrayList<>();
+                    select_number_E.clear();
                     break;
             }
-            ImageView imageView[] = new ImageView[6];
+            TextView imageView[] = new TextView[6];
             for(int i=0; i<6; i++){
                 imageView[i] = findViewById(getResources().getIdentifier(str + "_" + (i+1), "id", getPackageName()));
-                imageView[i].setImageResource(R.drawable.container_circle);
+                imageView[i].setBackgroundResource(R.drawable.container_circle);
             }
         }
     }
@@ -249,27 +251,8 @@ public class Lotto_input_number extends AppCompatActivity {
     }
     public void updateRoundInfo(){
         round = findViewById(R.id.input_round);
-        JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
-        jsoupAsyncTask.execute();
-    }
-    // 웹크롤링을 통한 현재 회차 정보 가져오기
-    private class JsoupAsyncTask extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try{
-                Document doc = Jsoup.connect("https://dhlottery.co.kr/common.do?method=main").get();
-                Elements round = doc.select("#lottoDrwNo");
-                title = round.text();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            round.setText((Integer.parseInt(title) + 1) + " 회차");
-        }
+        Intent intent = getIntent();
+        title = intent.getExtras().get("round").toString();
+        round.setText(Integer.parseInt(title) + 1 + " 회차");
     }
 }

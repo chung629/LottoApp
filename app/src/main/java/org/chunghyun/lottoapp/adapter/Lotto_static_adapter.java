@@ -38,9 +38,25 @@ public class Lotto_static_adapter extends RecyclerView.Adapter<Lotto_static_adap
 
     @Override
     public void onBindViewHolder(@NonNull Lotto_static_adapter.ViewHolder holder, int position) {
-        holder.number.setImageResource(context.getResources().getIdentifier("ball_" + (position+1), "drawable", context.getPackageName()));
+        holder.number.setBackgroundResource(returnResource(position+1 + ""));
+        holder.number.setText(position+1 + "");
         holder.num.setText(mNum.get(position));
         holder.graph.setProgress(Integer.parseInt(mNumber.get(position)));
+    }
+
+    public int returnResource(String number){
+        int num = Integer.parseInt(number);
+        if(num >=1 && num <= 10){
+            return R.drawable.common_ball1_10;
+        }else if(num >=11 && num <= 20){
+            return R.drawable.common_ball11_20;
+        }else if(num >=21 && num <= 30){
+            return R.drawable.common_ball21_30;
+        }else if(num >=31 && num <= 40){
+            return R.drawable.common_ball31_40;
+        }else{
+            return R.drawable.common_ball41_45;
+        }
     }
 
     @Override
@@ -50,7 +66,7 @@ public class Lotto_static_adapter extends RecyclerView.Adapter<Lotto_static_adap
 
     public class ViewHolder extends  RecyclerView.ViewHolder{
 
-        ImageView number;
+        TextView number;
         ProgressBar graph;
         TextView num;
         public ViewHolder(@NonNull View itemView) {

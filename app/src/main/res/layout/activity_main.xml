@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -21,6 +22,7 @@
             android:textAlignment="center"
             android:textSize="24dp"
             android:textStyle="bold"
+            android:textColor="@color/textColor"
             android:text="O회 당첨결과" />
 
         <TextView
@@ -30,15 +32,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:textSize="14dp"
+            android:textColor="@color/textColor"
             android:text="날짜" />
 
         <LinearLayout
             android:id="@+id/numberContainer_adapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:gravity="center|center_vertical"
             android:orientation="horizontal">
-
         </LinearLayout>
 
         <TextView
@@ -47,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="20dp"
+            android:textColor="@color/textColor"
             android:text="당첨금" />
 
     </LinearLayout>
@@ -112,7 +116,10 @@
                 android:layout_margin="2dp"
                 android:drawableTop="@drawable/ic_confirm"
                 android:layout_weight="1"
-                android:text="발생번호 확인" />
+                android:autoSizeTextType="uniform"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:text="랜덤 번호 확인" />
 
             <Button
                 android:id="@+id/input_confirm"
@@ -121,7 +128,10 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_confirm"
-                android:text="수동번호 확인" />
+                android:autoSizeTextType="uniform"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:text="수동 번호 확인" />
 
             <Button
                 android:id="@+id/select_number_confirm"
@@ -130,7 +140,10 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_confirm"
-                android:text="선택조합 확인" />
+                android:autoSizeTextType="uniform"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:text="조합 번호 확인" />
 
         </LinearLayout>
         <LinearLayout

@@ -74,12 +74,6 @@ public class Occur_confirm extends AppCompatActivity {
         // 광고 끝
     }
     void init(){
-        recyclerView = findViewById(R.id.occur_confirm_recyclerview);
-        db = MyDatabase.getDatabase(getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new Occur_confirm_adapter(db, Occur_confirm.this, round, numbers, bonus);
-        recyclerView.setAdapter(adapter);
         round = "";
         numbers = new ArrayList<>();
         bonus = "";
@@ -92,6 +86,12 @@ public class Occur_confirm extends AppCompatActivity {
         numbers.add(intent.getExtras().getString("num5"));
         numbers.add(intent.getExtras().getString("num6"));
         bonus = intent.getExtras().getString("bonus");
+        recyclerView = findViewById(R.id.occur_confirm_recyclerview);
+        db = MyDatabase.getDatabase(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new Occur_confirm_adapter(db, Occur_confirm.this, round, numbers, bonus);
+        recyclerView.setAdapter(adapter);
         db.occurDao().getAll().observe(this, new Observer<List<Lotto_Occur_MyEntity>>() {
             @Override
             public void onChanged(List<Lotto_Occur_MyEntity> lotto_occur_myEntities) {

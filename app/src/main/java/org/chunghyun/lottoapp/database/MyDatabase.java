@@ -9,9 +9,10 @@ import androidx.room.RoomDatabase;
 @Database(version = 1, entities = {Lotto_Input_MyEntity.class, Lotto_Occur_MyEntity.class, Lotto_Select_MyEntity.class}, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
 
-    public abstract MyDao myDao();
     public abstract OccurDao occurDao();
     public abstract SelectDao selectDao();
+    public abstract InputDao inputDao();
+
     private static  volatile MyDatabase INSTANCE;
     // 싱글톤
     public static MyDatabase getDatabase(final Context context){

@@ -1,6 +1,7 @@
 package org.chunghyun.lottoapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import org.chunghyun.lottoapp.database.Lotto_Select_MyEntity;
 import org.chunghyun.lottoapp.database.MyDatabase;
 import org.chunghyun.lottoapp.dialog.Select_Dialog;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Select_confirm_adapter extends RecyclerView.Adapter<Select_confirm_adapter.ViewHolder>{
@@ -49,7 +51,7 @@ public class Select_confirm_adapter extends RecyclerView.Adapter<Select_confirm_
         holder.num6.setText(items.get(position).getNum6());
         int count = 0;
         String result = "";
-        if(items.get(position).getRound() == round){
+        if(items.get(position).getRound().equals(round) && items.get(position).getResult().equals("미추첨")){
             count = items.get(position).countCollect(numbers);
             if(items.get(position).countBonus(bonus)){
                 count++;
@@ -120,6 +122,7 @@ public class Select_confirm_adapter extends RecyclerView.Adapter<Select_confirm_
 
     public void setItem(List<Lotto_Select_MyEntity> data){
         items = new ArrayList<>(data);
+        Collections.reverse(items);
         notifyDataSetChanged();
     }
 

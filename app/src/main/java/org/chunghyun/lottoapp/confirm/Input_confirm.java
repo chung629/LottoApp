@@ -32,7 +32,6 @@ public class Input_confirm extends AppCompatActivity {
     private String bonus;
     private AdView mAdView;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +73,6 @@ public class Input_confirm extends AppCompatActivity {
         // 광고 끝
     }
     void init(){
-        recyclerView = findViewById(R.id.input_confirm_recyclerview);
-        db = MyDatabase.getDatabase(getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new Input_confirm_adapter(db, Input_confirm.this, round, numbers, bonus);
-        recyclerView.setAdapter(adapter);
         round = "";
         numbers = new ArrayList<>();
         bonus = "";
@@ -92,8 +85,13 @@ public class Input_confirm extends AppCompatActivity {
         numbers.add(intent.getExtras().getString("num5"));
         numbers.add(intent.getExtras().getString("num6"));
         bonus = intent.getExtras().getString("bonus");
-
-        db.myDao().getAll().observe(this, new Observer<List<Lotto_Input_MyEntity>>() {
+        recyclerView = findViewById(R.id.input_confirm_recyclerview);
+        db = MyDatabase.getDatabase(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new Input_confirm_adapter(db, Input_confirm.this, round, numbers, bonus);
+        recyclerView.setAdapter(adapter);
+        db.inputDao().getAll().observe(this, new Observer<List<Lotto_Input_MyEntity>>() {
             @Override
             public void onChanged(List<Lotto_Input_MyEntity> lotto_input_myEntities) {
                 adapter.setItem(lotto_input_myEntities);

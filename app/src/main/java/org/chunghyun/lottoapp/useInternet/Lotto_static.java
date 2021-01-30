@@ -1,6 +1,7 @@
 package org.chunghyun.lottoapp.useInternet;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.google.gson.JsonParser;
 
 import org.chunghyun.lottoapp.R;
 import org.chunghyun.lottoapp.adapter.Lotto_static_adapter;
+import org.chunghyun.lottoapp.dialog.ProgressDialog;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
@@ -43,6 +45,7 @@ public class Lotto_static extends AppCompatActivity {
     ArrayList<String> list;
     ArrayList<String> num;
     Context context;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,9 @@ public class Lotto_static extends AppCompatActivity {
         context = getApplicationContext();
         JsoupAsyncTask jsoupAsyncTask = new JsoupAsyncTask();
         jsoupAsyncTask.execute();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.show();
         recyclerView = findViewById(R.id.static_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -88,6 +94,7 @@ public class Lotto_static extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             Lotto_static_adapter adapter = new Lotto_static_adapter(num, list, context);
             recyclerView.setAdapter(adapter);
+            progressDialog.dismiss();
             super.onPostExecute(aVoid);
         }
     }

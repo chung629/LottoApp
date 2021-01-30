@@ -34,43 +34,63 @@
         android:id="@+id/confirm_numberContainer_adapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center|center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
-        <ImageView
+            android:gravity="center_vertical|center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+             />
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
-        <ImageView
+            android:gravity="center_vertical|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
-        <ImageView
+            android:gravity="center_vertical|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
-        <ImageView
+            android:gravity="center_vertical|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
-        <ImageView
+            android:gravity="center_vertical|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24dp" />
+        <TextView
+            android:layout_margin="5dp"
             android:id="@+id/confirm_imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/container_circle" />
+            android:gravity="center_vertical|center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24dp" />
     </LinearLayout>
 </LinearLayout>

@@ -172,7 +172,7 @@ public class Lotto_occur_number extends AppCompatActivity {
         TextView textView = new TextView(this);
         textView.setBackgroundResource(R.drawable.container_circle);
         LinearLayout.LayoutParams tmp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tmp.setMargins(10, 10, 10, 10);
+        tmp.setMargins(10, 5, 10, 0);
         textView.setLayoutParams(tmp);
         linearLayout.addView(textView);
     }
@@ -181,7 +181,7 @@ public class Lotto_occur_number extends AppCompatActivity {
         TextView textView = new TextView(this);
         textView.setBackgroundResource(R.drawable.container_circle);
         LinearLayout.LayoutParams tmp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tmp.setMargins(10, 10, 10, 10);
+        tmp.setMargins(10, 5, 10, 0);
         textView.setLayoutParams(tmp);
         linearLayout.addView(textView);
     }
@@ -313,7 +313,7 @@ public class Lotto_occur_number extends AppCompatActivity {
             textView.setBackgroundResource(R.drawable.common_ball41_45);
         }
         LinearLayout.LayoutParams tmp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tmp.setMargins(10, 10, 10, 10);
+        tmp.setMargins(10, 5, 10, 0);
         textView.setLayoutParams(tmp);
         linearLayout.addView(textView);
     }
@@ -336,7 +336,7 @@ public class Lotto_occur_number extends AppCompatActivity {
             textView.setBackgroundResource(R.drawable.common_ball41_45);
         }
         LinearLayout.LayoutParams tmp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tmp.setMargins(10, 10, 10, 10);
+        tmp.setMargins(10, 5, 10, 0);
         textView.setLayoutParams(tmp);
         linearLayout.addView(textView);
     }

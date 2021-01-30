@@ -51,53 +51,77 @@
                 android:textSize="14dp" />
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:id="@+id/input_image_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle"/>
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/A_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
         </LinearLayout>
 
         <RelativeLayout
@@ -127,53 +151,77 @@
                 android:textSize="14dp" />
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:id="@+id/input_image_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle"/>
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/B_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
         </LinearLayout>
 
         <RelativeLayout
@@ -203,53 +251,77 @@
                 android:textSize="14dp" />
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:id="@+id/input_image_C"
+            android:gravity="center|center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle"/>
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/C_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
         </LinearLayout>
 
         <RelativeLayout
@@ -279,53 +351,77 @@
                 android:textSize="14dp" />
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:id="@+id/input_image_D"
+            android:gravity="center|center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle"/>
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/D_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
         </LinearLayout>
 
         <RelativeLayout
@@ -355,53 +451,77 @@
                 android:textSize="14dp" />
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:id="@+id/input_image_E"
             android:layout_width="match_parent"
+            android:gravity="center|center_vertical"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle"/>
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle"/>
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/E_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/container_circle" />
+                android:layout_margin="6dp"
+                android:gravity="center_vertical|center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/container_circle" />
         </LinearLayout>
     </LinearLayout>
 

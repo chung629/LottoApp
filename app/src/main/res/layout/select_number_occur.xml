@@ -109,9 +109,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="조합할 번호 선택 (최소 6개)"
+            android:text="조합 번호 선택 (최소 6개)"
             android:layout_marginLeft="10dp"
-            android:textSize="18dp"/>
+            android:textSize="14dp"/>
         <Button
             android:id="@+id/select_add_button"
             android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
             android:text="추가"
             android:gravity="right"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:background="@android:color/transparent"/>
 
         <Button
@@ -131,7 +131,7 @@
             android:text="초기화"
             android:gravity="right"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:background="@android:color/transparent"/>
     </LinearLayout>
 
@@ -140,9 +140,9 @@
         android:layout_below="@+id/select_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="4dp"
         app:orientation="horizontal"
-        app:columnCount="7"
+        app:columnCount="6"
         app:rowCount="7">
 
     </androidx.gridlayout.widget.GridLayout>

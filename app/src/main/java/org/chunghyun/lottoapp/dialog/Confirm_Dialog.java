@@ -37,7 +37,7 @@ public class Confirm_Dialog extends Dialog {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        db.myDao().delete(lotto_input_myEntity);
+                        db.inputDao().delete(lotto_input_myEntity);
                     }
                 }).start();
                 dismiss();
@@ -49,7 +49,7 @@ public class Confirm_Dialog extends Dialog {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        db.myDao().deleteRoundAll(lotto_input_myEntity.getRound());
+                        db.inputDao().deleteRoundAll(lotto_input_myEntity.getRound());
                     }
                 }).start();
                 dismiss();

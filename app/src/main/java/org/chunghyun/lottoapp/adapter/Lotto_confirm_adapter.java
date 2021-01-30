@@ -38,14 +38,35 @@ public class Lotto_confirm_adapter extends RecyclerView.Adapter<Lotto_confirm_ad
     public void onBindViewHolder(@NonNull Lotto_confirm_adapter.ViewHolder holder, int position) {
         holder.text_round.setText(round.get(position) + " 회차");
         holder.text_date.setText(date.get(position));
-        holder.imageView_1.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[0], "drawable", context.getPackageName()));
-        holder.imageView_2.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[1], "drawable", context.getPackageName()));
-        holder.imageView_3.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[2], "drawable", context.getPackageName()));
-        holder.imageView_4.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[3], "drawable", context.getPackageName()));
-        holder.imageView_5.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[4], "drawable", context.getPackageName()));
-        holder.imageView_6.setImageResource(context.getResources().getIdentifier( "ball_" + numbers.get(position)[5], "drawable", context.getPackageName()));
+
+        holder.imageView_1.setBackgroundResource(returnResource(numbers.get(position)[0]));
+        holder.imageView_2.setBackgroundResource(returnResource(numbers.get(position)[1]));
+        holder.imageView_3.setBackgroundResource(returnResource(numbers.get(position)[2]));
+        holder.imageView_4.setBackgroundResource(returnResource(numbers.get(position)[3]));
+        holder.imageView_5.setBackgroundResource(returnResource(numbers.get(position)[4]));
+        holder.imageView_6.setBackgroundResource(returnResource(numbers.get(position)[5]));
+        holder.imageView_1.setText(numbers.get(position)[0] + "");
+        holder.imageView_2.setText(numbers.get(position)[1] + "");
+        holder.imageView_3.setText(numbers.get(position)[2] + "");
+        holder.imageView_4.setText(numbers.get(position)[3] + "");
+        holder.imageView_5.setText(numbers.get(position)[4] + "");
+        holder.imageView_6.setText(numbers.get(position)[5] + "");
     }
 
+    public int returnResource(String number){
+        int num = Integer.parseInt(number);
+        if(num >=1 && num <= 10){
+            return R.drawable.common_ball1_10;
+        }else if(num >=11 && num <= 20){
+            return R.drawable.common_ball11_20;
+        }else if(num >=21 && num <= 30){
+            return R.drawable.common_ball21_30;
+        }else if(num >=31 && num <= 40){
+            return R.drawable.common_ball31_40;
+        }else{
+            return R.drawable.common_ball41_45;
+        }
+    }
     @Override
     public int getItemCount() {
         return round.size();
@@ -54,12 +75,12 @@ public class Lotto_confirm_adapter extends RecyclerView.Adapter<Lotto_confirm_ad
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView text_round;
         TextView text_date;
-        ImageView imageView_1;
-        ImageView imageView_2;
-        ImageView imageView_3;
-        ImageView imageView_4;
-        ImageView imageView_5;
-        ImageView imageView_6;
+        TextView imageView_1;
+        TextView imageView_2;
+        TextView imageView_3;
+        TextView imageView_4;
+        TextView imageView_5;
+        TextView imageView_6;
 
 
         ViewHolder(View item){
