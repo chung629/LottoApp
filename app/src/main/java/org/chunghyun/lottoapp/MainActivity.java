@@ -309,7 +309,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 String str =  jsonObject.get("drwNoDate").toString();
                 textView2.setText(str.substring(1, str.length()-1));
                 String money = jsonObject.get("firstWinamnt").toString();
-                textView3.setText("1등 당첨금 : " + Math.round((double)Integer.parseInt(money.substring(0, money.length()-3))/100000) + "억");
+                if(Integer.parseInt(money) == 0){
+                    textView3.setText("발표 준비중입니다.");
+                }else{
+                    textView3.setText("1등 당첨금 : " + Math.round((double)Integer.parseInt(money.substring(0, money.length()-3))/100000) + "억");
+                }
+
 
             }
         }, new Response.ErrorListener() {
